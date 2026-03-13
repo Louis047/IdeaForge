@@ -4,6 +4,7 @@ import { useState } from "react";
 import { UserRole } from "@/types";
 import { mockFields } from "@/mocks/fields";
 import { onboardingService } from "@/services/onboardingService";
+import { IconCompass, IconLightbulb } from "@/components/Icons";
 
 interface RolePopupProps {
   onComplete: () => void;
@@ -54,7 +55,7 @@ export default function RolePopup({ onComplete }: RolePopupProps) {
                 className={`role-card ${selectedRole === "mentor" ? "selected" : ""}`}
                 onClick={() => setSelectedRole("mentor")}
               >
-                <div className="role-icon">🧭</div>
+                <div className="role-icon"><IconCompass size={36} /></div>
                 <h3>Guide / Mentor</h3>
                 <p>
                   I have domain expertise and want to help aspiring founders with research backed guidance
@@ -65,7 +66,7 @@ export default function RolePopup({ onComplete }: RolePopupProps) {
                 className={`role-card ${selectedRole === "seeker" ? "selected" : ""}`}
                 onClick={() => setSelectedRole("seeker")}
               >
-                <div className="role-icon">💡</div>
+                <div className="role-icon"><IconLightbulb size={36} /></div>
                 <h3>Idea Seeker</h3>
                 <p>
                   I am looking for validated startup ideas backed by real academic research and data
@@ -99,7 +100,7 @@ export default function RolePopup({ onComplete }: RolePopupProps) {
                   className={`field-chip ${selectedFields.includes(field.id) ? "selected" : ""}`}
                   onClick={() => toggleField(field.id)}
                 >
-                  {field.icon} {field.name}
+                  {field.name}
                 </button>
               ))}
             </div>

@@ -3,6 +3,11 @@
 import { useState, useEffect } from "react";
 import RolePopup from "@/components/RolePopup";
 import { onboardingService } from "@/services/onboardingService";
+import {
+  IconResearch, IconTarget, IconUsers, IconBrain,
+  IconChart, IconMessage, IconDocument, IconBookOpen,
+  IconArrowRight,
+} from "@/components/Icons";
 
 export default function Home() {
   const [showPopup, setShowPopup] = useState(false);
@@ -29,9 +34,8 @@ export default function Home() {
             <a href="#experts" className="nav-link">Experts</a>
           </nav>
           <div className="nav-actions">
-            {/* HOOK: Wire to Supabase Auth in Phase 2b */}
-            <button className="btn-text">Log in</button>
-            <button className="btn-primary">Get Started Free</button>
+            <a href="/login" className="btn-text">Log in</a>
+            <a href="/login?signup=true" className="btn-primary">Get Started Free</a>
           </div>
         </div>
       </header>
@@ -44,12 +48,13 @@ export default function Home() {
           Connect with domain experts who can help you build.
         </p>
         <div className="hero-actions">
-          <button className="btn-primary" style={{ padding: "14px 32px", fontSize: "1rem" }}>
+          <a href="/login?signup=true" className="btn-primary" style={{ padding: "14px 32px", fontSize: "1rem" }}>
             Get IdeaForge Free
-          </button>
-          <button className="btn-secondary" style={{ padding: "14px 32px", fontSize: "1rem" }}>
+            <IconArrowRight size={18} />
+          </a>
+          <a href="#how-it-works" className="btn-secondary" style={{ padding: "14px 32px", fontSize: "1rem" }}>
             See how it works
-          </button>
+          </a>
         </div>
         <p className="trust-text">Trusted by researchers, founders, and startup teams worldwide</p>
         <div className="trust-bar">
@@ -70,11 +75,11 @@ export default function Home() {
               {/* Library Panel */}
               <div className="demo-panel">
                 <div className="demo-panel-header">Research Library</div>
-                <div className="demo-list-item">📄 AI Drug Interaction Analysis Using Knowledge Graphs</div>
-                <div className="demo-list-item">📄 Federated Learning in Clinical Research Settings</div>
-                <div className="demo-list-item">📄 Real Time Carbon Credit Verification Systems</div>
-                <div className="demo-list-item">📄 Adaptive Learning Algorithms for Adult Education</div>
-                <div className="demo-list-item">📄 Decentralized Identity for Financial Systems</div>
+                <div className="demo-list-item"><IconDocument size={14} /> AI Drug Interaction Analysis</div>
+                <div className="demo-list-item"><IconDocument size={14} /> Federated Learning in Clinical Research</div>
+                <div className="demo-list-item"><IconDocument size={14} /> Carbon Credit Verification Systems</div>
+                <div className="demo-list-item"><IconDocument size={14} /> Adaptive Learning for Education</div>
+                <div className="demo-list-item"><IconDocument size={14} /> Decentralized Identity for Finance</div>
               </div>
 
               {/* Main Panel */}
@@ -107,8 +112,8 @@ export default function Home() {
                     Uses NLP and knowledge graphs to analyze multi-drug interactions in real time,
                     reducing adverse events in polypharmacy patients.
                   </p>
-                  <div style={{ marginTop: "12px", fontSize: "0.75rem", opacity: 0.7 }}>
-                    📚 2 research citations
+                  <div style={{ marginTop: "12px", fontSize: "0.75rem", opacity: 0.7, display: "flex", alignItems: "center", gap: "4px" }}>
+                    <IconBookOpen size={12} /> 2 research citations
                   </div>
                 </div>
                 <div className="demo-panel" style={{ marginTop: "12px" }}>
@@ -131,7 +136,7 @@ export default function Home() {
           </div>
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon">🔬</div>
+              <div className="feature-icon"><IconResearch size={22} /></div>
               <h3>Research Backed Ideas</h3>
               <p>
                 Every startup idea is grounded in real academic papers, patents, and market data.
@@ -139,7 +144,7 @@ export default function Home() {
               </p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">🎯</div>
+              <div className="feature-icon"><IconTarget size={22} /></div>
               <h3>Novelty Control</h3>
               <p>
                 Set how innovative you want to be. From incremental improvements to moonshot breakthroughs,
@@ -147,7 +152,7 @@ export default function Home() {
               </p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">🤝</div>
+              <div className="feature-icon"><IconUsers size={22} /></div>
               <h3>Expert Matchmaking</h3>
               <p>
                 Get connected with verified domain specialists who have the research credentials
@@ -155,7 +160,7 @@ export default function Home() {
               </p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">🤖</div>
+              <div className="feature-icon"><IconBrain size={22} /></div>
               <h3>AI Research Engine</h3>
               <p>
                 Multi-agent AI system that searches, analyzes, and synthesizes research from
@@ -163,7 +168,7 @@ export default function Home() {
               </p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">📊</div>
+              <div className="feature-icon"><IconChart size={22} /></div>
               <h3>Feasibility Scoring</h3>
               <p>
                 Each idea comes with novelty, feasibility, and confidence scores so you can
@@ -171,7 +176,7 @@ export default function Home() {
               </p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">💬</div>
+              <div className="feature-icon"><IconMessage size={22} /></div>
               <h3>Expert Chat</h3>
               <p>
                 Built in messaging to collaborate with matched experts directly on the platform.
@@ -186,7 +191,7 @@ export default function Home() {
       <section className="section" id="how-it-works">
         <div className="section-header">
           <h2>From question to validated idea in minutes</h2>
-          <p>A simple three step process powered by AI research agents working behind the scenes.</p>
+          <p>A simple four step process powered by AI research agents working behind the scenes.</p>
         </div>
         <div className="steps-grid">
           <div className="step-card">
@@ -221,12 +226,12 @@ export default function Home() {
             Get started for free today.
           </p>
           <div style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
-            <button className="btn-primary" style={{ padding: "14px 32px", fontSize: "1rem" }}>
+            <a href="/login?signup=true" className="btn-primary" style={{ padding: "14px 32px", fontSize: "1rem" }}>
               Get Started Free
-            </button>
-            <button className="btn-secondary" style={{ padding: "14px 32px", fontSize: "1rem" }}>
+            </a>
+            <a href="#features" className="btn-secondary" style={{ padding: "14px 32px", fontSize: "1rem" }}>
               Learn More
-            </button>
+            </a>
           </div>
         </div>
       </section>
