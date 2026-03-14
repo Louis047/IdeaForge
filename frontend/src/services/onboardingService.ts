@@ -1,20 +1,20 @@
 import { UserPreferences } from "@/types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 
 export const onboardingService = {
-  // HOOK: Replace with Supabase / API call in Phase 3
   async savePreferences(prefs: UserPreferences): Promise<void> {
-    // --- MOCK ---
-    localStorage.setItem("ideaforge_prefs", JSON.stringify(prefs));
-    console.log("Preferences saved:", prefs);
+    // Keep local storage for synchronous reads during app boot
+    if (typeof window !== "undefined") {
+      localStorage.setItem("ideaforge_prefs", JSON.stringify(prefs));
+    }
 
-    // --- REAL ---
-    // await fetch(`${API_BASE}/api/onboarding/preferences`, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(prefs),
-    // });
+    // Also save to backend
+    await fetch(`${API_BASE}/api/onboarding/preferences`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(prefs),
+    });
   },
 
   getPreferences(): UserPreferences | null {
