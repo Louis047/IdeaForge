@@ -1,20 +1,39 @@
-# IdeaForge Backend
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.core.config import settings
 
-"""
-FastAPI backend for IdeaForge AI.
-This module will be built in Phase 3.
-See the frontend service layer (frontend/src/services/) for the API contracts.
-"""
+from app.api.routers import ideas, experts, dashboard, onboarding
 
-# TODO: Phase 3 implementation
-# - FastAPI app setup
-# - CrewAI agent pipeline
-# - Ollama / HuggingFace LLM provider
-# - Semantic Scholar + arXiv integrations
-# - duckduckgo-search web research
-# - API endpoints matching frontend service contracts:
-#   POST /api/ideas/generate
-#   GET  /api/experts
-#   GET  /api/dashboard/ideas
-#   POST /api/dashboard/ideas
-#   POST /api/onboarding/preferences
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    version=settings.VERSION,
+    description="IdeaForge AI API backend"
+)
+
+# Allow frontend to connect
+origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://ideaforge-ai.vercel.app", # Add production URL later
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(ideas.router, prefix="/api/ideas", tags=["ideas"])
+app.include_router(experts.router, prefix="/api/experts", tags=["experts"])
+app.include_router(dashboard.router, prefix="/api/dashboard", tags=["dashboard"])
+app.include_router(onboarding.router, prefix="/api/onboarding", tags=["onboarding"])
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to IdeaForge AI API"}
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
